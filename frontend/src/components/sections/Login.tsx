@@ -35,7 +35,7 @@ export default function Login() {
   }
 
   return (
-    <div className='flex flex-col flex-1 justify-center items-center gap-4'>
+    <div className='min-h-screen flex flex-col flex-1 justify-center items-center gap-4'>
       {/* Login title */}
       <h3 className='text-2xl sm:text-3xl md:text-4xl fugaz '>
         {isRegister ? 'Create your Swello account' : 'Login to Swello'}
