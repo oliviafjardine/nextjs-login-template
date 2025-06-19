@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { opensans, fugaz } from "../lib/fonts";
+import { opensans } from "../lib/fonts";
 import { AuthProvider } from "../context/AuthContext";
 import Head from "./head";
 import Header from "@/components/shared/Header";
