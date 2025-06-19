@@ -4,6 +4,7 @@ import { opensans, fugaz } from "../lib/fonts";
 import Link from "next/link";
 import { AuthProvider } from "../context/AuthContext";
 import Head from "./head";
+import Logout from "@/components/sections/Logout";
 
 export const metadata: Metadata = {
   title: "Swello",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <Link href={'/'}>
         <h1 className={`text-base sm:text-lg textGradient ${fugaz.className}`}>Swello</h1>
       </Link>
+      <Logout />
     </header>
   )
 
