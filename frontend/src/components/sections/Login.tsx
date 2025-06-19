@@ -43,7 +43,7 @@ export default function Login() {
     <div className='min-h-screen flex flex-col flex-1 justify-center items-center gap-4'>
       {/* Login title */}
       <h3 className='text-2xl sm:text-3xl md:text-4xl fugaz '>
-        {isRegister ? 'Create your Swello account' : 'Login to Swello'}
+        {isRegister ? 'Create your Title account' : 'Login to Title'}
       </h3>
       <p>You&#39;re one step away!</p>
 

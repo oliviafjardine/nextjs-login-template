@@ -8,7 +8,7 @@ export default function Header() {
       <div className="max-w-[1300px] mx-auto flex items-center justify-between gap-4 bg-white/80 backdrop-blur-md rounded-lg">
         <Link href={"/"}>
           <h1 className={`text-base sm:text-lg textGradient ${fugaz.className}`}>
-            Swello
+            Title
           </h1>
         </Link>
         <Logout />
