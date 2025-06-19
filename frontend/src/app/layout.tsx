@@ -3,6 +3,8 @@ import { Fugaz_One, Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { AuthProvider } from "../context/AuthContext";
+import Head from "./head";
+
 
 const opensans = Open_Sans({variable: "--font-inter", subsets: ["latin"],});
 const fugaz = Fugaz_One({variable: "--font-inter", subsets: ["latin"], weight: ['400']});
@@ -35,6 +37,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <Head>
+
+      </Head>
       <AuthProvider>
         <body
           className={'w-full max-w-[1000px] mx-auto text-sm sm:text-base min-h-screen flex flex-col ' + `${opensans.variable} antialiased`}

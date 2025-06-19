@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
+import Loading from "@/components/ui/Loading";
+import Login from "@/components/sections/Login";
 
 export default function Dashboard() {
-  const { currentUser, userDataObj } = useAuth()
+  const { currentUser, userDataObj, setUserDataObj, loading } = useAuth()
   const [data, setData] = useState({})
 
   useEffect(() => {
@@ -13,6 +15,14 @@ export default function Dashboard() {
     }
     setData(userDataObj)
   }, [currentUser, userDataObj])
+  
+    if (loading) {
+        return <Loading />
+    }
+
+    if (!currentUser) {
+        return <Login />
+    }
 
   return (
     <div className='flex flex-col flex-1'>
