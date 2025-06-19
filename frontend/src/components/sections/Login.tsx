@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Button from '../ui/Button'
 import { useAuth } from '../../context/AuthContext'
+import { Fugaz_One } from "next/font/google";
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -37,7 +38,9 @@ export default function Login() {
   return (
     <div className='flex flex-col flex-1 justify-center items-center gap-4'>
       {/* Login title */}
-      <h3 className='text-2xl sm:text-3xl md:text-4xl '>{isRegister ? 'Create your Swello account' : 'Login to Swello'}</h3>
+      <h3 className='text-2xl sm:text-3xl md:text-4xl fugaz '>
+        {isRegister ? 'Create your Swello account' : 'Login to Swello'}
+      </h3>
       <p>You're one step away!</p>
 
       {/* Input email and password */}

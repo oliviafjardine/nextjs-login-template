@@ -22,7 +22,7 @@ export default function Button({
       type="button"
       onClick={onClick}
       className={`rounded-full overflow-hidden duration-200 hover:opacity-60 border-2 border-solid border-blue-600 ${
-          (dark ? 'text-white bg-sky-600 border-blue-700' : 'text-blue-600 ') +
+          (dark ? 'text-white bg-blue-600 border-blue-700' : 'text-blue-600 ') +
           (full ? 'grid place-items-center w-full ' : ' ')
       } ${className}`}
     >
