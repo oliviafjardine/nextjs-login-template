@@ -26,8 +26,7 @@ export default function Button({
           (full ? 'grid place-items-center w-full ' : ' ')
       } ${className}`}
     >
-        <p className={'px-6 sm:px-10 whitespace-nowrap py-2 sm:py-3 '
-          + fugaz.className}>{text}
+        <p className='px-6 sm:px-10 whitespace-nowrap py-2 sm:py-3 font-semibold'>{text}
         </p>
     </button>
   );

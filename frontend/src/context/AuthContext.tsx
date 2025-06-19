@@ -17,7 +17,7 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const [currentUser, setCurrentUser] = useState<any>(null);
-    const [userDataObj, setUserDataObj] = useState<any>({});
+    const [userDataObj, setUserDataObj] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
     // AUTH HANDLERS
@@ -30,7 +30,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     function logout() {
-        setUserDataObj({});
+        setUserDataObj(null);
         setCurrentUser(null);
         return signOut(auth);
     }
@@ -40,7 +40,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
             try {
                 setLoading(true);
                 setCurrentUser(user);
-                if (!user) return;
+                if (!user) {
+                    console.log('No User Found');
+                    return;
+                };
                 // If user exists, fetch from firebase database
                 console.log('Fetching User Data');
                 const docRef = doc(db, 'users', user.uid);
