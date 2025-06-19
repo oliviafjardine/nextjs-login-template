@@ -27,7 +27,7 @@ export default function RootLayout({
           }
         >
           <Header />
-          <main className="w-full max-w-[1000px] mx-auto flex-1">
+          <main className="w-full max-w-[1300px] mx-auto flex-1">
             {children}
           </main>
           <Footer />
