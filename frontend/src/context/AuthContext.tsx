@@ -5,11 +5,15 @@ import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndP
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useState, useEffect, useContext } from 'react';
 
+interface UserData {
+    [key: string]: unknown;
+}
+
 interface AuthContextType {
     currentUser: User | null;
-    userDataObj: Record<string, any> | null;
-    signup: (email: string, password: string) => Promise<any>;
-    login: (email: string, password: string) => Promise<any>;
+    userDataObj: UserData | null;
+    signup: (email: string, password: string) => Promise<void>;
+    login: (email: string, password: string) => Promise<void>;
     logout: () => Promise<void>;
     loading: boolean;
 }
@@ -30,19 +34,19 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
-    const [userDataObj, setUserDataObj] = useState<Record<string, any> | null>(null);
+    const [userDataObj, setUserDataObj] = useState<UserData | null>(null);
     const [loading, setLoading] = useState(true);
 
     // AUTH HANDLERS
-    function signup(email: string, password: string) {
-        return createUserWithEmailAndPassword(auth, email, password);
+    async function signup(email: string, password: string): Promise<void> {
+        await createUserWithEmailAndPassword(auth, email, password);
     }
 
-    function login(email: string, password: string) {
-        return signInWithEmailAndPassword(auth, email, password);
+    async function login(email: string, password: string): Promise<void> {
+        await signInWithEmailAndPassword(auth, email, password);
     }
 
-    function logout() {
+    function logout(): Promise<void> {
         setUserDataObj(null);
         setCurrentUser(null);
         return signOut(auth);
@@ -56,19 +60,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 if (!user) {
                     console.log('No User Found');
                     return;
-                };
+                }
                 // If user exists, fetch from firebase database
                 console.log('Fetching User Data');
                 const docRef = doc(db, 'users', user.uid);
                 const docSnap = await getDoc(docRef);
-                let firebaseData = {};
+                let firebaseData: UserData = {};
                 if (docSnap.exists()) {
                     console.log('Found User Data')
-                    firebaseData = docSnap.data();
+                    firebaseData = docSnap.data() as UserData;
                 }
                 setUserDataObj(firebaseData);
-            } catch (err: any) {
-                console.log(err.message);
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    console.log(err.message);
+                } else {
+                    console.log('Unknown error');
+                }
             } finally {
                 setLoading(false);
             }
