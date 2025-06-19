@@ -1,14 +1,27 @@
 // Moved from AuthContext.ts to AuthContext.tsx
 'use client'
 import { auth, db } from '../../firebase';
-import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
-const AuthContext = React.createContext<any>(null);
+interface AuthContextType {
+    currentUser: User | null;
+    userDataObj: Record<string, any> | null;
+    signup: (email: string, password: string) => Promise<any>;
+    login: (email: string, password: string) => Promise<any>;
+    logout: () => Promise<void>;
+    loading: boolean;
+}
+
+const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
 
 export function useAuth() {
-    return useContext(AuthContext);
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
 }
 
 interface AuthProviderProps {
@@ -16,8 +29,8 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [currentUser, setCurrentUser] = useState<any>(null);
-    const [userDataObj, setUserDataObj] = useState<any>(null);
+    const [currentUser, setCurrentUser] = useState<User | null>(null);
+    const [userDataObj, setUserDataObj] = useState<Record<string, any> | null>(null);
     const [loading, setLoading] = useState(true);
 
     // AUTH HANDLERS
@@ -63,7 +76,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return unsubscribe;
     }, []);
 
-    const value = {
+    const value: AuthContextType = {
         currentUser,
         userDataObj,
         signup,

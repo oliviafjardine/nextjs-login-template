@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import Button from '../ui/Button'
 import { useAuth } from '../../context/AuthContext'
-import { Fugaz_One } from "next/font/google";
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -41,7 +40,7 @@ export default function Login() {
       <h3 className='text-2xl sm:text-3xl md:text-4xl fugaz '>
         {isRegister ? 'Create your Swello account' : 'Login to Swello'}
       </h3>
-      <p>You're one step away!</p>
+      <p>You&#39;re one step away!</p>
 
       {/* Input email and password */}
       <input id="email" name="email" autoComplete="email" value={email} onChange={(e) => {

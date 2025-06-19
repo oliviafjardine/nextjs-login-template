@@ -1,6 +1,4 @@
 import React from 'react';
-import { Fugaz_One } from 'next/font/google';
-const fugaz = Fugaz_One({variable: "--font-inter", subsets: ["latin"], weight: ['400']});
 
 interface ButtonProps {
   text: string;
